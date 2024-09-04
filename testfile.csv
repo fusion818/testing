@@ -1,0 +1,14 @@
+alert_name,date,author,origin,type,layer,category,severity,killchain,threat_actors,mitre_technique,search
+COR-Host-KC4-CreateAccountLocalAccount-LocalUserCreatedLocalGroup-CSEventData,8/3/2023,Big Red,Hunting,mitre,host,intrusion,25,['KC4_Exploitation'],None,['T1136.001 - Create Account: Local Account'],"index=""ot_crowdstrike_falcon"" FileName=""net.exe"" (CommandLine=""*localgroup*""
+ | rename FileName as file_name CommandLine as command_line
+ | fillnull value=""NA"" cid aid command_line file_name hostname
+ | stats count by _time cid aid command_line file_name hostname
+"
+COR-Host-KC5-IngressToolTransfer-LinuxCurlCommand-CSEventData,4/19/2023,Big Red,Hunting,mitre,host,intrusion,50,['KC5_Installation'],None,['T1105 - Ingress Tool Transfer'],"index=""ot_crowdstrike_falcon"" event_platform=Lin FileName = curl
+"
+COR-Host-KC4-ScheduledTaskJobScheduledTask-SuspiciousScheduledTask-CSEventData,7/25/2024,Big Red,Detection,correlation-event,host,intrusion,25,['kc4_exploitation'],None,['T1053.005 - Scheduled Task/Job: Scheduled Task'],"index=""ot_crowdstrike_falcon"" event_platform=Win event_simpleName=ScheduledTaskRegistered 
+  `ot_crowdstrike_scheduledtaskregistered_fields` "
+COR-Host-KC1-NetworkSniffing-Pktmon.exe-CSEventData,10/26/2022,Big Red,Intel,correlation-event,host,intrusion,25,['KC1_Reconnaissance'],None,['T1040 - Network Sniffing'],"index=""ot_crowdstrike_falcon"" ""pktmon.exe"" ParentBaseFileName=powershell.exe
+"
+COR-Host-KC7-ImpairDefenses-DisableorModifyTools-CurrentControlSet-CSEventData,6/30/2023,Big Red,Hunting,correlation-event,host,intrusion,50,['KC7_ActionsOnObjectives'],None,['T1562.001 - Impair Defenses: Disable or Modify Tools'],"index=ot_crowdstrike_falcon event_simpleName=ProcessRollup2 currentcontrolset | regex CommandLine=""reg\s+add.?system\\\currentcontrolset\\\services\\\.\/v\s+Start""  
+"
